@@ -3,7 +3,12 @@ package com.github.smartteamx.anti_spy_sms.base
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.multidex.MultiDexApplication
 import com.github.smartteamx.anti_spy_sms.BuildConfig
+import com.github.smartteamx.anti_spy_sms.di.*
 import com.jakewharton.threetenabp.AndroidThreeTen
+import org.koin.android.ext.koin.androidContext
+import org.koin.android.ext.koin.androidLogger
+import org.koin.core.context.startKoin
+import org.koin.core.logger.Level
 import timber.log.Timber
 
 /**
@@ -22,6 +27,16 @@ class AntiSpySmsApp : MultiDexApplication() {
 
         // Support Vector drawables for pre lollipop devices
         AppCompatDelegate.setCompatVectorFromResourcesEnabled(true)
+
+        // Initialize Koin DI
+        startKoin {
+            androidContext(this@AntiSpySmsApp)
+            androidLogger(Level.DEBUG)
+            modules(
+                dbModule, securityModule, repositoryModule,
+                viewModelModule, modelModule, adapterModule
+            )
+        }
     }
 
 }
