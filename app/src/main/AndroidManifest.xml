@@ -2,6 +2,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.github.smartteamx.anti_spy_sms">
 
+    <uses-permission android:name="android.permission.READ_SMS"/>
+
     <application
         android:name=".base.AntiSpySmsApp"
         android:allowBackup="false"
