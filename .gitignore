@@ -1,10 +1,8 @@
+/.idea
 *.iml
 .gradle
+gradle
 /local.properties
-/.idea/caches
-/.idea/libraries
-/.idea/modules.xml
-/.idea/workspace.xml
 /.idea/navEditor.xml
 /.idea/assetWizardSettings.xml
 .DS_Store
@@ -12,3 +10,21 @@
 /captures
 .externalNativeBuild
 .cxx
+.navigation
+captures/
+output.json
+
+#built application files
+*.apk
+*.ap_
+*.aab
+
+# files for the dex VM
+*.dex
+
+# generated files
+bin/
+gen/
+
+# Windows thumbnail db
+Thumbs.db
