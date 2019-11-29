@@ -23,7 +23,6 @@ buildscript {
         lifecycleVersion = '2.2.0-rc02'
         goldFingerVersion = '1.2.0'
         leakCanaryVersion = '2.0-beta-2'
-        kBarcodeVersion = '1.0.4'
         persianDateVersion = '0.7'
         qrGenVersion = '2.6.0'
     }
