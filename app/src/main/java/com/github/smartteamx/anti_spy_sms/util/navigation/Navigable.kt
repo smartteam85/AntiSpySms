@@ -8,8 +8,8 @@ import com.github.smartteamx.anti_spy_sms.util.EventObserver
 
 interface Navigable {
     fun makeViewModelNavigable(
-        viewModel: BaseViewModel,
-        activity: Activity,
+        viewModel: BaseViewModel?,
+        activity: Activity?,
         lifecycleOwner: LifecycleOwner,
         navController: NavController
     )
@@ -18,24 +18,24 @@ interface Navigable {
 class NavigableDelegation : Navigable {
 
     override fun makeViewModelNavigable(
-        viewModel: BaseViewModel,
-        activity: Activity,
+        viewModel: BaseViewModel?,
+        activity: Activity?,
         lifecycleOwner: LifecycleOwner,
         navController: NavController
     ) {
-        viewModel.navigationCommand.observe(lifecycleOwner, EventObserver { command ->
+        viewModel?.navigationCommand?.observe(lifecycleOwner, EventObserver { command ->
             when (command) {
                 is NavigationCommand.To ->
                     navController.navigate(command.directions)
                 is NavigationCommand.ToWithFinish -> {
                     navController.navigate(command.directions)
-                    activity.finish()
+                    activity?.finish()
                 }
                 is NavigationCommand.ToAction ->
                     navController.navigate(command.actionId)
                 is NavigationCommand.ToActionWithFinish -> {
                     navController.navigate(command.actionId)
-                    activity.finish()
+                    activity?.finish()
                 }
                 is NavigationCommand.Back ->
                     navController.navigateUpOrFinish(activity)
