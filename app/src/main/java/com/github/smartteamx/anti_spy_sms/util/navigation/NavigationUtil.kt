@@ -10,3 +10,5 @@ fun NavController.navigateUpOrFinish(activity: Activity?) {
     if (!navigateUp())
         activity?.finish()
 }
+
+fun navigable(): Lazy<Navigable> = lazy { NavigableDelegation() }
