@@ -5,6 +5,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.LifecycleRegistry
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -34,10 +37,39 @@ abstract class BaseAdapter<T>(diffCallback: DiffUtil.ItemCallback<T>) :
     override fun onBindViewHolder(holder: DataBindingViewHolder, position: Int) =
         holder.bind(getItem(position))
 
+    override fun onViewAttachedToWindow(holder: DataBindingViewHolder) {
+        super.onViewAttachedToWindow(holder)
+        holder.onAppear()
+    }
+
+    override fun onViewDetachedFromWindow(holder: DataBindingViewHolder) {
+        super.onViewDetachedFromWindow(holder)
+        holder.onDisappear()
+    }
+
     abstract override fun getItemViewType(position: Int): Int
 
     inner class DataBindingViewHolder(private val binding: ViewDataBinding) :
-        RecyclerView.ViewHolder(binding.root) {
+        RecyclerView.ViewHolder(binding.root), LifecycleOwner {
+
+        private val lifecycleRegistry = LifecycleRegistry(this)
+
+        init {
+            lifecycleRegistry.currentState = Lifecycle.State.INITIALIZED
+        }
+
+        fun onAppear() {
+            lifecycleRegistry.currentState = Lifecycle.State.CREATED
+            lifecycleRegistry.currentState = Lifecycle.State.STARTED
+        }
+
+        fun onDisappear() {
+            lifecycleRegistry.currentState = Lifecycle.State.DESTROYED
+        }
+
+        override fun getLifecycle(): Lifecycle {
+            return lifecycleRegistry
+        }
 
         fun bind(item: T) {
             binding.apply {
