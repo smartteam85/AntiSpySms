@@ -2,6 +2,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.github.smartteamx.anti_spy_sms">
 
+    <uses-sdk tools:overrideLibrary="uk.co.brightec.kbarcode" />
+
     <application
         android:name=".base.AntiSpySmsApp"
         android:allowBackup="false"
