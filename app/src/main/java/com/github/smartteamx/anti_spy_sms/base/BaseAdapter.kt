@@ -1,6 +1,7 @@
 package com.github.smartteamx.anti_spy_sms.base
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
@@ -11,6 +12,9 @@ import com.github.smartteamx.anti_spy_sms.BR
 
 abstract class BaseAdapter<T>(diffCallback: DiffUtil.ItemCallback<T>) :
     ListAdapter<T, BaseAdapter<T>.DataBindingViewHolder>(diffCallback) {
+
+    var onItemClicked: ((item: T, view: View) -> Unit)? = null
+    var onItemLongClicked: ((item: T, view: View) -> Unit)? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DataBindingViewHolder {
         return DataBindingViewHolder(
@@ -39,8 +43,16 @@ abstract class BaseAdapter<T>(diffCallback: DiffUtil.ItemCallback<T>) :
             binding.apply {
                 setVariable(BR.item, item)
                 executePendingBindings()
+                root.apply {
+                    setOnClickListener {
+                        onItemClicked?.invoke(item, this)
+                    }
+                    setOnLongClickListener {
+                        onItemLongClicked?.invoke(item, this)
+                        return@setOnLongClickListener true
+                    }
+                }
             }
-
         }
     }
 }
