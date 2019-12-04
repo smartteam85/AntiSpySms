@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
+import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
 import com.github.smartteamx.anti_spy_sms.util.navigation.Navigable
 import com.github.smartteamx.anti_spy_sms.util.navigation.navigable
@@ -41,5 +42,14 @@ abstract class BaseActivity<VM : BaseViewModel, DB : ViewDataBinding> : AppCompa
     abstract fun configEvents()
     abstract fun bindObservables()
     abstract fun initBinding()
+
+    fun getCurrentFragment(): Fragment? {
+        val navHostFragment = supportFragmentManager.findFragmentById(navigationId)
+        val currentFragments = navHostFragment?.childFragmentManager?.fragments
+        return currentFragments?.let {
+            if (it.isNotEmpty()) it[0]
+            else null
+        }
+    }
 
 }
