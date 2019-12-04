@@ -6,6 +6,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
+import com.github.smartteamx.anti_spy_sms.util.FragmentOnBackPressed
 import com.github.smartteamx.anti_spy_sms.util.navigation.Navigable
 import com.github.smartteamx.anti_spy_sms.util.navigation.navigable
 
@@ -42,6 +43,15 @@ abstract class BaseActivity<VM : BaseViewModel, DB : ViewDataBinding> : AppCompa
     abstract fun configEvents()
     abstract fun bindObservables()
     abstract fun initBinding()
+
+    override fun onBackPressed() {
+        val currentFragment = getCurrentFragment()
+        if (currentFragment !is FragmentOnBackPressed) super.onBackPressed()
+        else (currentFragment as? FragmentOnBackPressed)?.onBackPressed()?.let {
+            if (it) super.onBackPressed()
+        }
+    }
+
 
     fun getCurrentFragment(): Fragment? {
         val navHostFragment = supportFragmentManager.findFragmentById(navigationId)
