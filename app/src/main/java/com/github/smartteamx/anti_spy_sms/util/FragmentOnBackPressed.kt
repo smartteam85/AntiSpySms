@@ -5,8 +5,8 @@ package com.github.smartteamx.anti_spy_sms.util
  */
 interface FragmentOnBackPressed {
     /**
-     * If return true only onBack of child will be called
-     * But if return false onBack of both parent and child will be called
+     * If return false only onBack of child will be called
+     * But if return true onBack of both parent and child will be called
      * @return false if your processing has priority else true
      */
     fun onBackPressed(): Boolean
