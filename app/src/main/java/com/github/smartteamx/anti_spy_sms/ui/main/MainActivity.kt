@@ -9,7 +9,7 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>() {
 
     override val viewModel: MainViewModel by viewModel()
     override val layoutRes: Int = R.layout.activity_main
-    override val navigationId: Int = R.navigation.main_navigation
+    override val navigationId: Int = R.id.fragment_navigation
 
 
     override fun configEvents() {
