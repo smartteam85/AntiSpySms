@@ -9,7 +9,7 @@ android {
     buildToolsVersion "29.0.2"
     defaultConfig {
         applicationId "com.github.smartteamx.anti_spy_sms"
-        minSdkVersion 18
+        minSdkVersion 19
         targetSdkVersion 29
         versionCode 1
         versionName "1.0"
@@ -48,6 +48,7 @@ dependencies {
     // Core Dependencies
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlinVersion"
+    implementation "org.jetbrains.kotlin:kotlin-reflect:$kotlinVersion"
     implementation "androidx.appcompat:appcompat:$appCompatVersion"
     implementation "androidx.constraintlayout:constraintlayout:$constraintLayoutVersion"
     implementation "androidx.core:core-ktx:$ktxVersion"
@@ -57,6 +58,12 @@ dependencies {
     implementation "androidx.legacy:legacy-support-v4:$supportFragmentVersion"
     implementation "com.android.support:multidex:$multidexVersion"
     implementation "androidx.preference:preference-ktx:$preferenceKtxVersion"
+
+    // modules
+    implementation project(path: ':smsmanager')
+
+    //circle imageview
+    implementation "de.hdodenhof:circleimageview:$circleImageView"
 
     // DateTime
     implementation "com.github.samanzamani.persiandate:PersianDate:$persianDateVersion"

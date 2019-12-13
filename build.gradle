@@ -26,6 +26,7 @@ buildscript {
         leakCanaryVersion = '2.0-beta-2'
         persianDateVersion = '0.7'
         qrGenVersion = '2.6.0'
+        circleImageView = '3.0.1'
     }
     repositories {
         google()
