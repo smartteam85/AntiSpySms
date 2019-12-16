@@ -12,10 +12,20 @@ class ConversationsFragment : BaseFragment<ConversationsViewModel, FragmentConve
     override val viewModel: ConversationsViewModel by viewModel()
     override val layoutRes: Int = R.layout.fragment_conversations
 
-    private val conversationsAdapter:ConversationsAdapter by inject()
+    private val conversationsAdapter: ConversationsAdapter by inject()
 
     override fun configEvents() {
-
+        list_conversations?.let {
+            it.adapter = conversationsAdapter
+            it.layoutManager?.let { layoutManager ->
+                it.addOnScrollListener(object : EndlessRecyclerViewScrollListener(layoutManager) {
+                    override fun onLoadMore(page: Int) {
+                        viewModel.getConversations(page)
+                    }
+                })
+            }
+        }
+        viewModel.getConversations(1)
     }
 
     override fun bindObservables() {
