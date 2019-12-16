@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="item"
             type="com.github.smartteamx.anti_spy_sms.data.ConversationItem" />
@@ -10,6 +13,61 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/imgContact"
+            android:layout_width="@dimen/contact_image_dimen"
+            android:layout_height="@dimen/contact_image_dimen"
+            android:layout_margin="@dimen/medium_margin"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:src="@tools:sample/avatars" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/medium_margin"
+            android:ellipsize="end"
+            android:maxLines="2"
+            android:textDirection="locale"
+            android:textAlignment="viewStart"
+            android:text="@{item.snippet}"
+            app:layout_constraintBottom_toBottomOf="@+id/imgContact"
+            app:layout_constraintEnd_toStartOf="@id/guideline"
+            app:layout_constraintStart_toEndOf="@id/imgContact"
+            app:layout_constraintTop_toBottomOf="@+id/textView"
+            tools:text="@tools:sample/lorem/random" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/medium_margin"
+            android:ellipsize="end"
+            android:maxLength="40"
+            android:text="@{item.date.toGMTString()}"
+            android:maxLines="1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/imgContact"
+            tools:text="@tools:sample/date/hhmm" />
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/medium_margin"
+            app:layout_constraintStart_toEndOf="@+id/imgContact"
+            app:layout_constraintTop_toTopOf="@+id/imgContact"
+            android:text="@{item.address}"
+            android:textSize="16sp"
+            tools:text="@tools:sample/us_phones" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="341dp" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
