@@ -13,15 +13,19 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>() {
 
 
     override fun configEvents() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+
     }
 
     override fun bindObservables() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+
     }
 
     override fun initBinding() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        binding.apply {
+            lifecycleOwner = this@MainActivity
+            vm = viewModel
+            executePendingBindings()
+        }
     }
 
 }
